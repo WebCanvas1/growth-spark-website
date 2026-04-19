@@ -26,11 +26,7 @@ const ContactPage = () => {
                   Let’s build something that grows your business
                 </span>
 
-                <h1 className="text-4xl font-extrabold tracking-tight text-white md:text-6xl">
-                  Contact WebStarter
-                </h1>
-
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-white/80 md:text-xl">
+                <p className="max-w-2xl text-lg leading-8 text-white/80 md:text-xl">
                   Enquire about a new business website, redesign, landing page,
                   or monthly hosting. We’ll help you choose the right setup for
                   your business.
@@ -79,7 +75,7 @@ const ContactPage = () => {
 
                     <a
                       href="mailto:pharelrohit1992@gmail.com"
-                      className="mt-5 inline-block break-all text-lg font-semibold text-blue-600 hover:underline"
+                      className="mt-5 inline-block whitespace-nowrap text-base font-semibold text-blue-600 hover:underline sm:text-lg"
                     >
                       pharelrohit1992@gmail.com
                     </a>
@@ -157,7 +153,23 @@ const ContactPage = () => {
                   </p>
                 </div>
 
-                <form className="space-y-6">
+                <form
+                  action="https://formsubmit.co/pharelrohit1992@gmail.com"
+                  method="POST"
+                  className="space-y-6"
+                >
+                  <input
+                    type="hidden"
+                    name="_subject"
+                    value="New website enquiry from WebStarter"
+                  />
+                  <input
+                    type="hidden"
+                    name="_next"
+                    value="https://webcanvas1.github.io/growth-spark-website/#/contact"
+                  />
+                  <input type="hidden" name="_captcha" value="false" />
+
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
                       <label className="mb-2 block text-sm font-medium text-slate-700">
@@ -165,6 +177,8 @@ const ContactPage = () => {
                       </label>
                       <input
                         type="text"
+                        name="name"
+                        required
                         className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 outline-none transition focus:border-blue-600 focus:bg-white"
                         placeholder="Your name"
                       />
@@ -176,6 +190,8 @@ const ContactPage = () => {
                       </label>
                       <input
                         type="email"
+                        name="email"
+                        required
                         className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 outline-none transition focus:border-blue-600 focus:bg-white"
                         placeholder="you@example.com"
                       />
@@ -188,6 +204,7 @@ const ContactPage = () => {
                     </label>
                     <input
                       type="tel"
+                      name="phone"
                       className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 outline-none transition focus:border-blue-600 focus:bg-white"
                       placeholder="Your phone number"
                     />
@@ -199,6 +216,7 @@ const ContactPage = () => {
                     </label>
                     <input
                       type="text"
+                      name="enquiry_subject"
                       className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 outline-none transition focus:border-blue-600 focus:bg-white"
                       placeholder="Website design, hosting, redesign..."
                     />
@@ -210,6 +228,8 @@ const ContactPage = () => {
                     </label>
                     <textarea
                       rows={6}
+                      name="message"
+                      required
                       className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none transition focus:border-blue-600 focus:bg-white"
                       placeholder="Tell us about your business, your goals, and what kind of website you need..."
                     />
