@@ -6,27 +6,25 @@ import {
   Globe,
   MonitorSmartphone,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const ContactPage = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isSuccess = params.get("success") === "true";
+
   return (
     <>
       <Navbar />
 
       <main className="min-h-screen bg-background text-foreground">
-        <div className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(15,23,42,0.92)_0%,rgba(30,41,59,0.88)_18%,rgba(248,250,252,1)_18%,rgba(248,250,252,1)_100%)]">
-          <div className="absolute inset-x-0 top-24 h-[340px] bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.18),transparent_38%),radial-gradient(circle_at_top_left,rgba(245,158,11,0.14),transparent_32%)]" />
-
-          <section className="relative mx-auto max-w-7xl px-6 pb-16 pt-32 md:px-10 lg:px-12">
-            <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <div className="relative">
+          <section className="relative mx-auto max-w-7xl px-6 pb-16 pt-20 md:px-10 lg:px-12">
+            <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="max-w-3xl">
-                <span className="mb-4 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/85 backdrop-blur">
-                  Let’s build something that grows your business
-                </span>
-
-                <p className="max-w-2xl text-lg leading-8 text-white/80 md:text-xl">
+                <p className="max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
                   Enquire about a new business website, redesign, landing page,
                   or monthly hosting. We’ll help you choose the right setup for
                   your business.
@@ -35,12 +33,26 @@ const ContactPage = () => {
 
               <Link
                 to="/"
-                className="inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
+                className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Back to Home
               </Link>
             </div>
+
+            {isSuccess && (
+              <div className="mb-8 rounded-2xl border border-green-200 bg-green-50 px-5 py-4 text-green-800 shadow-sm">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-green-600" />
+                  <div>
+                    <p className="font-semibold">Your enquiry has been sent successfully.</p>
+                    <p className="mt-1 text-sm text-green-700">
+                      Thanks for reaching out. We’ll get back to you soon.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="grid gap-8 lg:grid-cols-[1fr_0.95fr]">
               <section className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-xl md:p-10">
@@ -75,7 +87,7 @@ const ContactPage = () => {
 
                     <a
                       href="mailto:pharelrohit1992@gmail.com"
-                      className="mt-5 inline-block whitespace-nowrap text-base font-semibold text-blue-600 hover:underline sm:text-lg"
+                      className="mt-5 inline-block whitespace-nowrap text-sm font-medium text-blue-600 hover:underline"
                     >
                       pharelrohit1992@gmail.com
                     </a>
@@ -166,7 +178,7 @@ const ContactPage = () => {
                   <input
                     type="hidden"
                     name="_next"
-                    value="https://webcanvas1.github.io/growth-spark-website/#/contact"
+                    value="https://webcanvas1.github.io/growth-spark-website/#/contact?success=true"
                   />
                   <input type="hidden" name="_captcha" value="false" />
 
@@ -243,9 +255,9 @@ const ContactPage = () => {
 
                     <button
                       type="submit"
-                      className="rounded-full bg-blue-600 px-8 py-4 text-lg font-semibold text-white transition hover:bg-blue-700"
+                      className="whitespace-nowrap rounded-full bg-blue-600 px-8 py-4 text-lg font-semibold text-white transition hover:bg-blue-700"
                     >
-                      Submit Enquiry
+                      Submit Form
                     </button>
                   </div>
                 </form>
