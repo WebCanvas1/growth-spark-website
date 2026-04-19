@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebsiteStarter | Web Development & Hosting</title>
+    <meta name="description" content="Professional web development and hosting services for small businesses. Custom websites, reliable hosting, and expert support to grow your online presence." />
+    <meta property="og:title" content="Web Development & Hosting Services" />
+    <meta property="og:description" content="Unlock your business potential with professional web development and hosting." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+
+  <body>
+    <script>
+      // GitHub Pages SPA path restoration
+      (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
