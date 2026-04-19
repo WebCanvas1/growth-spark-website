@@ -18,7 +18,8 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+    <section className="relative flex min-h-screen items-center overflow-hidden">
+      {/* Background Images */}
       {images.map((img, i) => (
         <div
           key={i}
@@ -31,39 +32,47 @@ const HeroSection = () => {
         </div>
       ))}
 
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
-        <h1 className="text-4xl font-extrabold leading-tight md:text-6xl">
-          Unlock Your Business Potential with Us
-        </h1>
+      {/* Content */}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 text-left text-white">
+        <div className="max-w-2xl">
+          <h1 className="text-4xl font-extrabold leading-tight md:text-6xl">
+            Unlock Your Business
+            <br />
+            Potential with Us
+          </h1>
 
-        <p className="mt-6 text-lg leading-8 text-white/85 md:text-xl">
-          We build beautiful, high-performing websites and provide reliable
-          hosting so you can focus on what matters — growing your business.
-        </p>
+          <p className="mt-6 text-lg leading-8 text-white/85 md:text-xl">
+            We build beautiful, high-performing websites and provide reliable
+            hosting so you can focus on what matters — growing your business.
+          </p>
 
-        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href="#services"
-            className="rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:opacity-90"
-          >
-            Our Services
-          </a>
+          <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row">
+            <a
+              href="#services"
+              className="rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:opacity-90"
+            >
+              Our Services
+            </a>
 
-          <Link
-            to="/contact"
-            className="rounded-lg border border-primary-foreground/30 px-6 py-3 font-semibold text-primary-foreground transition hover:bg-primary-foreground/10"
-          >
-            Contact Us
-          </Link>
+            <Link
+              to="/contact"
+              className="rounded-lg border border-white/40 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
+            >
+              Contact Us
+            </Link>
+          </div>
         </div>
 
-        <div className="mt-8 flex justify-center gap-2">
+        {/* Slider dots */}
+        <div className="mt-8 flex gap-2">
           {images.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentImage(i)}
               className={`h-2 rounded-full transition-all ${
-                currentImage === i ? "w-8 bg-primary" : "w-2 bg-primary-foreground/40"
+                currentImage === i
+                  ? "w-8 bg-primary"
+                  : "w-2 bg-white/40"
               }`}
               aria-label={`Go to slide ${i + 1}`}
             />
