@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import heroGardener from "@/assets/hero-gardener.jpg";
 import heroElectrician from "@/assets/hero-electrician.jpg";
 import heroBakery from "@/assets/hero-bakery.jpg";
@@ -17,6 +18,12 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const scrollToServices = () => {
+    document.getElementById("services")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
       {/* Background Images */}
@@ -33,7 +40,7 @@ const HeroSection = () => {
       ))}
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 text-left text-white">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 text-left text-white lg:px-12">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-extrabold leading-tight md:text-6xl">
             Unlock Your Business
@@ -47,12 +54,12 @@ const HeroSection = () => {
           </p>
 
           <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row">
-            <a
-              href="#services"
+            <button
+              onClick={scrollToServices}
               className="rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:opacity-90"
             >
               Our Services
-            </a>
+            </button>
 
             <Link
               to="/contact"
