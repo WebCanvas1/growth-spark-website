@@ -6,7 +6,10 @@ import {
   Globe,
   MonitorSmartphone,
 } from "lucide-react";
+
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -14,6 +17,9 @@ const ContactPage = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const isSuccess = params.get("success") === "true";
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
 
   return (
     <>
