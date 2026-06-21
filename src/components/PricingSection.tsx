@@ -6,7 +6,7 @@ const plans = [
   {
     name: "Business",
     badge: null,
-    promoPrice: "30",
+    promoPrice: "15",
     promoPriceSup: "",
     normalPrice: "",
     tagline: "For ambitious professionals",
@@ -20,7 +20,7 @@ const plans = [
   {
     name: "Pro",
     badge: "Bestseller",
-    promoPrice: "20",
+    promoPrice: "10",
     promoPriceSup: "",
     normalPrice: "",
     tagline: "For small business owners",
@@ -35,7 +35,7 @@ const plans = [
   {
     name: "Lite",
     badge: null,
-    promoPrice: "15",
+    promoPrice: "5",
     promoPriceSup: "",
     normalPrice: "",
     tagline: "For personal projects",
@@ -58,7 +58,7 @@ const PricingSection = () => {
           We'll help you get started
         </h2>
         <p className="mt-4 text-lg text-muted-foreground">
-          Build your own website for just $15 per month lifetime!
+          Build your own website for just $5 per month lifetime!
         </p>
       </div>
 
