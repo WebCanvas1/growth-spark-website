@@ -19,7 +19,9 @@ const PlanSignup = () => {
     email: "",
     phone: "",
     businessDescription: "",
+    website: "",
   });
+
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -44,9 +46,13 @@ const PlanSignup = () => {
     }
 
     setLoading(true);
+
     try {
       const { data, error } = await supabase.functions.invoke("send-plan-inquiry", {
-        body: { ...formData, plan },
+        body: {
+          ...formData,
+          plan,
+        },
       });
 
       if (error || (data && data.success === false)) {
@@ -67,17 +73,30 @@ const PlanSignup = () => {
       <div className="min-h-screen flex items-center justify-center bg-background px-6">
         <div className="max-w-md text-center space-y-6">
           <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto">
-            <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <svg
+              className="w-8 h-8 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
+
           <h1 className="text-2xl font-bold text-foreground font-heading">
             Thank You!
           </h1>
+
           <p className="text-muted-foreground">
             Thank you for providing the details, our team will contact you
             shortly for the next process.
           </p>
+
           <Button
             onClick={() => navigate("/")}
             className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
@@ -103,15 +122,29 @@ const PlanSignup = () => {
           <span className="inline-block rounded-full bg-accent/15 text-accent px-4 py-1 text-sm font-semibold mb-4">
             {plan} Plan
           </span>
+
           <h1 className="text-3xl font-bold text-foreground font-heading">
             Get Started with {plan}
           </h1>
+
           <p className="mt-2 text-muted-foreground">
             Fill in your details and we'll get you set up.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Hidden honeypot field for spam bots. Real users will not see this. */}
+          <input
+            type="text"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            className="hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
+
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="firstName">First Name</Label>
@@ -124,6 +157,7 @@ const PlanSignup = () => {
                 required
               />
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="lastName">Last Name</Label>
               <Input
@@ -158,7 +192,7 @@ const PlanSignup = () => {
               type="tel"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="+1 (555) 000-0000"
+              placeholder="+61 400 000 000"
               required
             />
           </div>
