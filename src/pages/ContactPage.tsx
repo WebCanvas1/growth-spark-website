@@ -92,10 +92,10 @@ const ContactPage = () => {
                     </p>
 
                     <a
-                      href="mailto:pharelrohit1992@gmail.com"
+                      href="mailto:webstarter17@gmail.com"
                       className="mt-5 inline-block whitespace-nowrap text-sm font-medium text-blue-600 hover:underline"
                     >
-                      pharelrohit1992@gmail.com
+                      webstarter17@gmail.com
                     </a>
                   </div>
 
@@ -172,7 +172,7 @@ const ContactPage = () => {
                 </div>
 
                 <form
-                  action="https://formsubmit.co/pharelrohit1992@gmail.com"
+                  action="https://formsubmit.co/webstarter17@gmail.com"
                   method="POST"
                   className="space-y-6"
                 >
