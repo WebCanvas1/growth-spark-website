@@ -1,7 +1,21 @@
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
+const allowedOrigins = [
+  'https://webstarter.com.au',
+  'https://www.webstarter.com.au',
+  'http://localhost:8080',
+  'http://localhost:5173',
+];
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get('origin') || '';
+
+  return {
+    'Access-Control-Allow-Origin': allowedOrigins.includes(origin)
+      ? origin
+      : 'https://webstarter.com.au',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
+}
 
 const GATEWAY_URL = 'https://connector-gateway.lovable.dev/resend';
 const OWNER_EMAIL = 'pharelrohit1992@gmail.com';
@@ -13,6 +27,7 @@ interface InquiryPayload {
   phone: string;
   businessDescription: string;
   plan: string;
+  website?: string;
 }
 
 function escapeHtml(s: string): string {
@@ -29,17 +44,36 @@ function isValidEmail(email: string): boolean {
 }
 
 Deno.serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req);
+
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
+  }
+
+  if (req.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      status: 405,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
   }
 
   try {
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
+
     if (!LOVABLE_API_KEY) throw new Error('LOVABLE_API_KEY not configured');
     if (!RESEND_API_KEY) throw new Error('RESEND_API_KEY not configured');
 
     const body = (await req.json()) as Partial<InquiryPayload>;
+
+    // Honeypot spam field
+    const website = String(body.website ?? '').trim();
+    if (website) {
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
     const firstName = String(body.firstName ?? '').trim().slice(0, 100);
     const lastName = String(body.lastName ?? '').trim().slice(0, 100);
@@ -91,9 +125,10 @@ Deno.serve(async (req) => {
     });
 
     const data = await resp.json();
+
     if (!resp.ok) {
       console.error('Resend error:', resp.status, data);
-      throw new Error(`Resend API failed [${resp.status}]: ${JSON.stringify(data)}`);
+      throw new Error('Email provider failed');
     }
 
     return new Response(JSON.stringify({ success: true }), {
@@ -103,7 +138,11 @@ Deno.serve(async (req) => {
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     console.error('send-plan-inquiry error:', message);
-    return new Response(JSON.stringify({ success: false, error: message }), {
+
+    return new Response(JSON.stringify({
+      success: false,
+      error: 'Unable to send enquiry right now.',
+    }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
