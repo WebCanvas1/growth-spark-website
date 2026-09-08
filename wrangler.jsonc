@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "growth-spark-website",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-08",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "webstarter-handovers",
+      "database_id": "bf54554d-b2cd-4f95-96f7-e8bf7bdc6c30"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "HANDOVER_FILES",
+      "bucket_name": "webstarter-handovers"
+    }
+  ],
+  "vars": {
+    "SITE_URL": "https://webstarter.com.au"
+  }
+}
