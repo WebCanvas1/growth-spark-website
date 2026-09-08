@@ -6,7 +6,7 @@ const plans = [
   {
     name: "Business",
     badge: null,
-    promoPrice: "15",
+    promoPrice: "45",
     promoPriceSup: "",
     normalPrice: "",
     tagline: "For ambitious professionals",
@@ -20,7 +20,7 @@ const plans = [
   {
     name: "Pro",
     badge: "Bestseller",
-    promoPrice: "10",
+    promoPrice: "25",
     promoPriceSup: "",
     normalPrice: "",
     tagline: "For small business owners",
@@ -35,7 +35,7 @@ const plans = [
   {
     name: "Lite",
     badge: null,
-    promoPrice: "5",
+    promoPrice: "10",
     promoPriceSup: "",
     normalPrice: "",
     tagline: "For personal projects",
@@ -58,7 +58,7 @@ const PricingSection = () => {
           We'll help you get started
         </h2>
         <p className="mt-4 text-lg text-muted-foreground">
-          Build your own website for just $5 per month lifetime!
+          Simple monthly plans starting from just $10 per month.
         </p>
       </div>
 
@@ -79,7 +79,6 @@ const PricingSection = () => {
             )}
 
             <h3 className="mt-2 text-2xl font-bold text-foreground">{plan.name}</h3>
-
 
             <div className="mt-4 flex items-start justify-center">
               <span className="text-sm text-muted-foreground mt-2">$</span>
@@ -114,11 +113,9 @@ const PricingSection = () => {
             >
               Start now
             </Button>
-
           </div>
         ))}
       </div>
-
     </div>
   </section>
   );
