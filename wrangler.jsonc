@@ -22,6 +22,6 @@
     }
   ],
   "vars": {
-    "SITE_URL": "https://REPLACE_WITH_YOUR_LIVE_DOMAIN"
+    "SITE_URL": "https://webstarter.com.au"
   }
 }
