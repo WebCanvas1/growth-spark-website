@@ -12,7 +12,7 @@
     {
       "binding": "DB",
       "database_name": "webstarter-handovers",
-      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+      "database_id": "bf54554d-b2cd-4f95-96f7-e8bf7bdc6c30"
     }
   ],
   "r2_buckets": [
